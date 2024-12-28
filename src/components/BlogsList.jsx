@@ -31,7 +31,12 @@ const BlogsList = ({ user }) => {
       </Togglable>
       <div>&nbsp;</div>
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} blogUpdated={() => {
+          // Refresh blogs list after update
+          blogService.getAll().then(blogs =>
+            setBlogs( blogs )
+          )
+        }} />
       )}
     </div>
   )
