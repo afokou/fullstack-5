@@ -32,6 +32,7 @@ const LoginForm = ({ setUser }) => {
 
   return (
     <form onSubmit={handleLogin}>
+      <h2>Login to application</h2>
       {errorMessage && <div>{errorMessage}</div>}
       <div>
         username
