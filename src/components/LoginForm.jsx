@@ -16,7 +16,7 @@ const LoginForm = ({ setUser }) => {
         username, password,
       })
       window.localStorage.setItem(
-        'loggedNoteappUser', JSON.stringify(user)
+        'loggedBlogappUser', JSON.stringify(user)
       )
       setUser(user)
       setUsername('')
