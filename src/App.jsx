@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import LoginForm from './components/LoginForm.jsx';
-import BlogsList from './components/BlogsList.jsx';
-import blogService from './services/blogs.js';
+import LoginForm from './components/LoginForm.jsx'
+import BlogsList from './components/BlogsList.jsx'
+import blogService from './services/blogs.js'
 
 const App = () => {
   const [user, setUser] = useState(null)

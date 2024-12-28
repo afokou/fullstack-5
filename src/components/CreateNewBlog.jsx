@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import blogService from '../services/blogs.js'
-import { useState } from 'react';
+import { useState } from 'react'
 
 const CreateNewBlog = ({ blogCreated }) => {
   const [successMessage, setSuccessMessage] = useState(null)

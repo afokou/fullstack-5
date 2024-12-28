@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import blogService from '../services/blogs.js';
-import Blog from './Blog.jsx';
-import CreateNewBlog from './CreateNewBlog.jsx';
-import Togglable from './Togglable.jsx';
+import { useEffect, useState } from 'react'
+import blogService from '../services/blogs.js'
+import Blog from './Blog.jsx'
+import CreateNewBlog from './CreateNewBlog.jsx'
+import Togglable from './Togglable.jsx'
 
 const BlogsList = ({ user }) => {
   const [blogs, setBlogs] = useState([])
@@ -48,4 +48,4 @@ const BlogsList = ({ user }) => {
   )
 }
 
-export default BlogsList;
+export default BlogsList
