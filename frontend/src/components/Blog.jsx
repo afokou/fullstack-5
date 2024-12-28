@@ -20,7 +20,7 @@ const Blog = ({ blog, user, blogService, blogUpdated }) => {
   return (
     <div style={blogStyle}>
       <div className="title">
-        {blog.title} <button onClick={() => setExpanded(!expanded)}>{expanded ? 'hide' : 'view'}</button>
+        {blog.title} <button className="viewBtn" onClick={() => setExpanded(!expanded)}>{expanded ? 'hide' : 'view'}</button>
       </div>
       {expanded && (
         <div>
