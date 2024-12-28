@@ -6,6 +6,7 @@ import Togglable from './Togglable.jsx'
 
 const BlogsList = ({ user }) => {
   const [blogs, setBlogs] = useState([])
+  const [createBlogVisible, setCreateBlogVisible] = useState(false)
 
   useEffect(() => {
     blogService.getAll().then(blogs => {
@@ -23,13 +24,14 @@ const BlogsList = ({ user }) => {
         window.location.reload()
       }}>logout</button></div>
       <div>&nbsp;</div>
-      <Togglable buttonLabel="new blog">
+      <Togglable visible={createBlogVisible} setVisible={setCreateBlogVisible} buttonLabel="new blog">
         <CreateNewBlog blogService={blogService} blogCreated={() => {
           // Refresh blogs list after creation
           blogService.getAll().then(blogs => {
             // Sort the blogs by likes first then set them to state
             blogs.sort((a, b) => b.likes - a.likes)
             setBlogs(blogs)
+            setCreateBlogVisible(false)
           })
         }} />
       </Togglable>
