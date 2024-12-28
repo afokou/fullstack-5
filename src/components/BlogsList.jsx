@@ -24,7 +24,7 @@ const BlogsList = ({ user }) => {
       }}>logout</button></div>
       <div>&nbsp;</div>
       <Togglable buttonLabel="new blog">
-        <CreateNewBlog blogCreated={() => {
+        <CreateNewBlog blogService={blogService} blogCreated={() => {
           // Refresh blogs list after creation
           blogService.getAll().then(blogs => {
             // Sort the blogs by likes first then set them to state

@@ -8,7 +8,7 @@ test('renders title but not url or likes by default', async () => {
     username: 'tester'
   }
 
-  const blog =     {
+  const blog = {
     'title': 'React patterns',
     'url': 'https://reactpatterns.com/',
     'likes': 16,
@@ -36,7 +36,7 @@ test('renders url and likes after view button clicked', async () => {
     username: 'tester'
   }
 
-  const blog =     {
+  const blog = {
     'title': 'React patterns',
     'url': 'https://reactpatterns.com/',
     'likes': 16,
@@ -66,7 +66,7 @@ test('like button clicked twice calls event handler twice', async () => {
     username: 'tester'
   }
 
-  const blog =     {
+  const blog = {
     'title': 'React patterns',
     'url': 'https://reactpatterns.com/',
     'likes': 16,

@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types'
-import blogService from '../services/blogs.js'
 import { useState } from 'react'
 
-const CreateNewBlog = ({ blogCreated }) => {
+const CreateNewBlog = ({ blogService, blogCreated }) => {
   const [successMessage, setSuccessMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
   const [title, setTitle] = useState('')
@@ -11,7 +10,7 @@ const CreateNewBlog = ({ blogCreated }) => {
   const addBlog = async (event) => {
     event.preventDefault()
     try {
-      await blogService.createBlog({
+      const response = await blogService.createBlog({
         title: title,
         url: url,
       })
@@ -21,7 +20,7 @@ const CreateNewBlog = ({ blogCreated }) => {
       setTimeout(() => {
         setSuccessMessage(null)
       }, 5000)
-      blogCreated()
+      blogCreated(response)
     } catch (exception) {
       setErrorMessage(exception.response.data.error)
       setTimeout(() => {
@@ -31,12 +30,13 @@ const CreateNewBlog = ({ blogCreated }) => {
   }
 
   return (
-    <form onSubmit={addBlog}>
+    <form onSubmit={addBlog} role="form">
       {successMessage && <div>{successMessage}</div>}
       {errorMessage && <div>{errorMessage}</div>}
       <div>
-        title
+        <label htmlFor="title">title</label>
         <input
+          id="title"
           type="text"
           value={title}
           name="Title"
@@ -44,15 +44,16 @@ const CreateNewBlog = ({ blogCreated }) => {
         />
       </div>
       <div>
-        url
+        <label htmlFor="url">url</label>
         <input
+          id="url"
           type="text"
           value={url}
           name="Url"
           onChange={({ target }) => setUrl(target.value)}
         />
       </div>
-      <button type="submit">create</button>
+      <button type="submit" role="submit">create</button>
     </form>
   )
 }
