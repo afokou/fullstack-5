@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
-import blogService from '../services/blogs.js'
 
-const Blog = ({ blog, user, blogUpdated }) => {
+const Blog = ({ blog, user, blogService, blogUpdated }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -20,18 +19,18 @@ const Blog = ({ blog, user, blogUpdated }) => {
 
   return (
     <div style={blogStyle}>
-      <div>
+      <div className="title">
         {blog.title} <button onClick={() => setExpanded(!expanded)}>{expanded ? 'hide' : 'view'}</button>
       </div>
       {expanded && (
         <div>
-          <div>{blog.url}</div>
-          <div>
-            likes {blog.likes} <button onClick={handleLike}>like</button>
+          <div className="url">{blog.url}</div>
+          <div className="likes">
+            likes {blog.likes} <button className="likeBtn" onClick={handleLike}>like</button>
           </div>
           <div>{blog.author.name}</div>
           {user.username === blog.author.username && (
-            <div><button onClick={async () => {
+            <div><button className="deleteBtn" onClick={async () => {
               if (window.confirm(`Remove blog ${blog.title} by ${blog.author.name}`)) {
                 await blogService.deleteBlog(blog.id)
                 blogUpdated()
