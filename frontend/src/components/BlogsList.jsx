@@ -36,16 +36,18 @@ const BlogsList = ({ user }) => {
         }} />
       </Togglable>
       <div>&nbsp;</div>
-      {blogs.map(blog =>
-        <Blog key={blog.id} blogService={blogService} blog={blog} user={user} blogUpdated={() => {
+      <div className="blogs">
+        {blogs.map(blog =>
+          <Blog key={blog.id} blogService={blogService} blog={blog} user={user} blogUpdated={() => {
           // Refresh blogs list after update
-          blogService.getAll().then(blogs => {
+            blogService.getAll().then(blogs => {
             // Sort the blogs by likes first then set them to state
-            blogs.sort((a, b) => b.likes - a.likes)
-            setBlogs(blogs)
-          })
-        }} />
-      )}
+              blogs.sort((a, b) => b.likes - a.likes)
+              setBlogs(blogs)
+            })
+          }} />
+        )}
+      </div>
     </div>
   )
 }
