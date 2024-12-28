@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import blogService from '../services/blogs.js';
 import Blog from './Blog.jsx';
 import CreateNewBlog from './CreateNewBlog.jsx';
+import Togglable from './Togglable.jsx';
 
 const BlogsList = ({ user }) => {
   const [blogs, setBlogs] = useState([])
@@ -20,12 +21,14 @@ const BlogsList = ({ user }) => {
         window.location.reload()
       }}>logout</button></div>
       <div>&nbsp;</div>
-      <CreateNewBlog blogCreated={() => {
-        // Refresh blogs list after creation
-        blogService.getAll().then(blogs =>
-          setBlogs( blogs )
-        )
-      }} />
+      <Togglable buttonLabel="new blog">
+        <CreateNewBlog blogCreated={() => {
+          // Refresh blogs list after creation
+          blogService.getAll().then(blogs =>
+            setBlogs( blogs )
+          )
+        }} />
+      </Togglable>
       <div>&nbsp;</div>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
