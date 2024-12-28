@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import blogService from '../services/blogs.js'
 import { useState } from 'react';
 
@@ -54,6 +55,10 @@ const CreateNewBlog = ({ blogCreated }) => {
       <button type="submit">create</button>
     </form>
   )
+}
+
+CreateNewBlog.propTypes = {
+  blogCreated: PropTypes.func.isRequired,
 }
 
 export default CreateNewBlog
