@@ -105,5 +105,29 @@ describe('Blog app', () => {
       await page.click('text="view"')
       await expect(page.getByText('remove')).not.toBeVisible()
     });
+
+    test('blogs are ordered by likes', async ({ page }) => {
+      // Create 2 blogs
+      await page.click('text="new blog"')
+      await page.fill('input[name="Title"]', 'Test blog 1')
+      await page.fill('input[name="Url"]', 'https://testurl.com')
+      await page.click('button[type=submit]')
+
+      await page.click('text="new blog"')
+      await page.fill('input[name="Title"]', 'Test blog 2')
+      await page.fill('input[name="Url"]', 'https://testurl.com')
+      await page.click('button[type=submit]')
+
+      // Like the second blog twice
+      await expect(page.getByText('Test blog 2')).toBeVisible()
+      const locator = page.locator('text="Test blog 2"').locator("..")
+      await locator.locator('.viewBtn').click()
+      await locator.locator('.likeBtn').click()
+      await expect(page.getByText('likes 1')).toBeVisible()
+
+      // Check that the first item in the list is the second blog now
+      const firstBlog = await page.locator('.blogs > div:first-child')
+      await expect(firstBlog).toContainText('Test blog 2')
+    });
   })
 })
