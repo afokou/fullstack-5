@@ -8,9 +8,11 @@ const BlogsList = ({ user }) => {
   const [blogs, setBlogs] = useState([])
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )
+    blogService.getAll().then(blogs => {
+      // Sort the blogs by likes first then set them to state
+      blogs.sort((a, b) => b.likes - a.likes)
+      setBlogs(blogs)
+    })
   }, [])
 
   return (
@@ -24,18 +26,22 @@ const BlogsList = ({ user }) => {
       <Togglable buttonLabel="new blog">
         <CreateNewBlog blogCreated={() => {
           // Refresh blogs list after creation
-          blogService.getAll().then(blogs =>
-            setBlogs( blogs )
-          )
+          blogService.getAll().then(blogs => {
+            // Sort the blogs by likes first then set them to state
+            blogs.sort((a, b) => b.likes - a.likes)
+            setBlogs(blogs)
+          })
         }} />
       </Togglable>
       <div>&nbsp;</div>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} blogUpdated={() => {
           // Refresh blogs list after update
-          blogService.getAll().then(blogs =>
-            setBlogs( blogs )
-          )
+          blogService.getAll().then(blogs => {
+            // Sort the blogs by likes first then set them to state
+            blogs.sort((a, b) => b.likes - a.likes)
+            setBlogs(blogs)
+          })
         }} />
       )}
     </div>
