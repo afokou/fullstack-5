@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import blogService from '../services/blogs.js';
 
-const Blog = ({ blog, blogUpdated }) => {
+const Blog = ({ blog, user, blogUpdated }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -29,6 +29,14 @@ const Blog = ({ blog, blogUpdated }) => {
             likes {blog.likes} <button onClick={handleLike}>like</button>
           </div>
           <div>{blog.author.name}</div>
+          {user.username === blog.author.username && (
+            <div><button onClick={async () => {
+              if (window.confirm(`Remove blog ${blog.title} by ${blog.author.name}`)) {
+                await blogService.deleteBlog(blog.id)
+                blogUpdated()
+              }
+            }}>remove</button></div>
+          )}
         </div>
       )}
     </div>
